@@ -17,7 +17,7 @@ import org.json.JSONObject;
  */
 public class RegisterController extends AsyncTask<String, String, String> {
 
-    private static final String REGISTER_URL = "http://dbremote.esy.es/login/Register.php";
+    private static final String REGISTER_URL = "http://dbremote.esy.es/login/RegisterController.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
 

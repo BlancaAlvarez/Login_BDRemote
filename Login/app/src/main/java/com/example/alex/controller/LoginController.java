@@ -11,8 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.alex.connection.ServerConnection;
+import com.example.alex.login.EnterpriseList;
 import com.example.alex.login.R;
-import com.example.alex.login.ReadComments;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +22,7 @@ import org.json.JSONObject;
  */
 public class LoginController extends AsyncTask<String, String, String> {
 
-    private static final String LOGIN_URL = "http://dbremote.esy.es/login/Login.php";
+    private static final String LOGIN_URL = "http://dbremote.esy.es/login/LoginController.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
 
@@ -72,7 +72,7 @@ public class LoginController extends AsyncTask<String, String, String> {
                 edit.putString("username", username);
                 edit.commit();
 
-                intent = new Intent(activity, ReadComments.class);
+                intent = new Intent(activity, EnterpriseList.class);
                 activity.finish();
                 activity.startActivity(intent);
                 return json.getString(TAG_MESSAGE);

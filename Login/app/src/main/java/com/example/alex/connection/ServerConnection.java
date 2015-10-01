@@ -14,7 +14,7 @@ import java.net.URL;
 /**
  * @autor Armando Alexis Sepulveda Cruz
  * @date 2015-09-28
- * @private Clase que comunica los datos entre la aplicación Android y Servicio Web (un script como php)
+ * @private Clase que comunica los datos entre la aplicacion Android y Servicio Web (un script como php)
  * por medio de JSON.
  */
 public class ServerConnection {
@@ -24,7 +24,7 @@ public class ServerConnection {
 
     /**
      * @private Recibe la respuesta del Servicio Web
-     * @param webUrl La url con la cual se comunicará la aplicación Android
+     * @param webUrl La url con la cual se comunicaro la aplicacion Android
      * @return JSONObject con la respuesta del Servicio Web
      */
     public JSONObject makeHttpRequestGet(String webUrl) {
@@ -72,9 +72,9 @@ public class ServerConnection {
     }
 
     /**
-     * @private Envía parámetros y recibe la respuesta del Servicio Web
-     * @param webUrl La url con la cual se comunicará la aplicación Android
-     * @param params Parémetros a enviar al servicio Web
+     * @private Envia parametros y recibe la respuesta del Servicio Web
+     * @param webUrl La url con la cual se comunicara la aplicacion Android
+     * @param params Parametros a enviar al servicio Web
      * @return JSONObject con la respuesta del Servicio Web
      */
     public JSONObject makeHttpRequestPost(String webUrl, String params) {
