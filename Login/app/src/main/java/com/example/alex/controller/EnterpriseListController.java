@@ -25,7 +25,7 @@ public class EnterpriseListController extends AsyncTask<String, String, String> 
     private ProgressDialog pDialog;
 
     // url to get all products list
-    private final String url_all_empresas = "http://dbremote.esy.es/connect/Controller.php";
+    private final String url_all_empresas = "http://dbremote.esy.es/login/EnterpriseController.php";
 
     // JSON Node names
     private final String TAG_SUCCESS = "success";

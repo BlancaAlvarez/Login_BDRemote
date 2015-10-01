@@ -21,6 +21,7 @@ public class ServerConnection {
 
     public final String POST = "POST";
     public final String GET = "GET";
+    public final String NEW_LINE = "\n";
 
     /**
      * @private Recibe la respuesta del Servicio Web
@@ -44,7 +45,7 @@ public class ServerConnection {
             buffer = new StringBuffer();
 
             while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
+                buffer.append(line + NEW_LINE);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -102,7 +103,7 @@ public class ServerConnection {
             buffer = new StringBuffer();
 
             while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
+                buffer.append(line + NEW_LINE);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
