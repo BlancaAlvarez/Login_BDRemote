@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.alex.login.JSONParser;
+import com.example.alex.connection.ServerConnection;
 import com.example.alex.login.R;
 import com.example.alex.login.ReadComments;
 
@@ -21,13 +22,14 @@ import org.json.JSONObject;
  */
 public class LoginController extends AsyncTask<String, String, String> {
 
+    private static final String LOGIN_URL = "http://dbremote.esy.es/login/Login.php";
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
+
     private Activity activity;
     private EditText user;
     private EditText pass;
     private ProgressDialog pDialog;
-    private static final String LOGIN_URL = "http://dbremote.esy.es/login/Login.php";
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MESSAGE = "message";
 
     public LoginController(Activity activity) {
         this.activity = activity;
@@ -48,7 +50,11 @@ public class LoginController extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... args) {
         StringBuilder params = new StringBuilder();
-        JSONParser jsonParser = new JSONParser();
+        ServerConnection serverConnection = new ServerConnection();
+        JSONObject json;
+        SharedPreferences sp;
+        Editor edit;
+        Intent intent;
         String username = user.getText().toString();
         String password = pass.getText().toString();
         int success;
@@ -57,19 +63,18 @@ public class LoginController extends AsyncTask<String, String, String> {
             params.append("username").append("=").append(username)
                     .append("&").append("password").append("=").append(password);
 
-            JSONObject json = jsonParser.makeHttpRequestPost(LOGIN_URL, params.toString());
+            json = serverConnection.makeHttpRequestPost(LOGIN_URL, params.toString());
 
             success = json.getInt(TAG_SUCCESS);
             if (success == 1) {
-                SharedPreferences sp = PreferenceManager
-                        .getDefaultSharedPreferences(activity);
-                SharedPreferences.Editor edit = sp.edit();
+                sp = PreferenceManager.getDefaultSharedPreferences(activity);
+                edit = sp.edit();
                 edit.putString("username", username);
                 edit.commit();
 
-                Intent i = new Intent(activity, ReadComments.class);
+                intent = new Intent(activity, ReadComments.class);
                 activity.finish();
-                activity.startActivity(i);
+                activity.startActivity(intent);
                 return json.getString(TAG_MESSAGE);
             } else {
                 return json.getString(TAG_MESSAGE);

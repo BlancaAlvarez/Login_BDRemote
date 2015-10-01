@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.alex.login.JSONParser;
+import com.example.alex.connection.ServerConnection;
 import com.example.alex.login.R;
 
 import org.json.JSONException;
@@ -17,13 +17,14 @@ import org.json.JSONObject;
  */
 public class RegisterController extends AsyncTask<String, String, String> {
 
+    private static final String REGISTER_URL = "http://dbremote.esy.es/login/Register.php";
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
+
     private EditText user;
     private EditText pass;
     private Activity activity;
     private ProgressDialog pDialog;
-    private static final String REGISTER_URL = "http://dbremote.esy.es/login/Register.php";
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MESSAGE = "message";
 
     public RegisterController (Activity activity) {
         this.activity = activity;
@@ -45,7 +46,7 @@ public class RegisterController extends AsyncTask<String, String, String> {
     protected String doInBackground(String... args) {
 
         StringBuilder params = new StringBuilder();
-        JSONParser jsonParser = new JSONParser();
+        ServerConnection serverConnection = new ServerConnection();
         JSONObject json;
         String username = user.getText().toString();
         String password = pass.getText().toString();
@@ -55,7 +56,7 @@ public class RegisterController extends AsyncTask<String, String, String> {
             params.append("username").append("=").append(username)
                     .append("&").append("password").append("=").append(password);
 
-            json = jsonParser.makeHttpRequestPost(REGISTER_URL, params.toString());
+            json = serverConnection.makeHttpRequestPost(REGISTER_URL, params.toString());
 
             success = json.getInt(TAG_SUCCESS);
             if (success == 1) {
