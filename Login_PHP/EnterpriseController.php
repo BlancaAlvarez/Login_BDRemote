@@ -1,5 +1,4 @@
 <?php
-
 	require("Connection.php");
 	
 	$model = new Connection();
@@ -35,3 +34,4 @@
 	 
 		echo json_encode($response);
 	}
+?>
